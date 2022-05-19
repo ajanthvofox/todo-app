@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "userId": "100",
+    "title": "My sample to do item one",
+    "description": "My sample to do item one lurum ipsum dummy text plain text",
+    "state": 0
+  },
+  {
+    "id": 2,
+    "userId": "101",
+    "title": "My sample to do item two",
+    "description": "My sample to do item two lurum ipsum dummy text plain text",
+    "state": 0
+  },
+  {
+    "id": 3,
+    "userId": "100",
+    "title": "My sample to do item three",
+    "description": "My sample to do item three lurum ipsum dummy text plain text",
+    "state": 1
+  },
+  {
+    "id": 4,
+    "userId": "102",
+    "title": "My sample to do item four",
+    "description": "My sample to do item four lurum ipsum dummy text plain text",
+    "state": 2
+  }
+]
