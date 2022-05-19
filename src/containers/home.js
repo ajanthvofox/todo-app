@@ -60,7 +60,7 @@ const Home = (props) => {
   const updatefilterState = (e) => {
     let filteredData = [];
     if (e.target.value === 'default') {
-      if (state.filterText) 
+      if (state.filterText)
         filteredData = state.todoItems.filter(item => item.title.toLowerCase().includes(state.filterText.toLowerCase()));
     } else {
       filteredData = state.todoItems.filter(item => item.state === parseInt(e.target.value) && item.title.toLowerCase().includes(state.filterText.toLowerCase()));
@@ -140,7 +140,7 @@ const Home = (props) => {
       else
         newFilteredItems = newTodoItems.filter(item => item.title.toLowerCase().includes(state.filterText.toLowerCase()));
     }
-      
+
     setState((prevState) => ({
       ...prevState,
       todoItems: newTodoItems,
@@ -210,41 +210,42 @@ const Home = (props) => {
             </select>
           </div>
         </div>
-
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col" onClick={() => sortWith('id')}># {state.sortItem === 'id' ? state.sortAsc ? <FaArrowUp className="sort-arrow" /> : <FaArrowDown className="sort-arrow" /> : ''}</th>
-              <th scope="col" onClick={() => sortWith('title')}>Title {state.sortItem === 'title' ? state.sortAsc ? <FaArrowUp className="sort-arrow" /> : <FaArrowDown className="sort-arrow" /> : ''}</th>
-              <th scope="col" onClick={() => sortWith('state')}>State {state.sortItem === 'state' ? state.sortAsc ? <FaArrowUp className="sort-arrow" /> : <FaArrowDown className="sort-arrow" /> : ''}</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              (state.filterText || state.filterState !== 'default' ? state.filteredItems : state.todoItems)?.map((item, key) => (
-                <tr key={key}>
-                  <th scope="row">{item.id}</th>
-                  <td>{item.title}</td>
-                  <td>
-                    <select onChange={(e) => updateStatus(e, item.id)} value={item.state} className="form-control">
-                      {
-                        Object.values(statuses).map((statusItem, index) => (
-                          <option key={index} value={index}>{statusItem}</option>
-                        ))
-                      }
-                    </select>
-                  </td>
-                  <td>
-                    <a onClick={() => openViewModal(item.id)}><FaEye /></a> &nbsp;
-                    <a onClick={() => openEditModal(item.id)}><FaPen /></a> &nbsp;
-                    <a onClick={() => openDeleteModal(item.id)}><FaTimes /></a> &nbsp;
-                  </td>
-                </tr>
-              ))
-            }
-          </tbody>
-        </table>
+        <div className="table-responsive">
+          <table className="table">
+            <thead>
+              <tr>
+                <th scope="col" onClick={() => sortWith('id')}># {state.sortItem === 'id' ? state.sortAsc ? <FaArrowUp className="sort-arrow" /> : <FaArrowDown className="sort-arrow" /> : ''}</th>
+                <th scope="col" onClick={() => sortWith('title')}>Title {state.sortItem === 'title' ? state.sortAsc ? <FaArrowUp className="sort-arrow" /> : <FaArrowDown className="sort-arrow" /> : ''}</th>
+                <th scope="col" onClick={() => sortWith('state')}>State {state.sortItem === 'state' ? state.sortAsc ? <FaArrowUp className="sort-arrow" /> : <FaArrowDown className="sort-arrow" /> : ''}</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                (state.filterText || state.filterState !== 'default' ? state.filteredItems : state.todoItems)?.map((item, key) => (
+                  <tr key={key}>
+                    <th scope="row">{item.id}</th>
+                    <td>{item.title}</td>
+                    <td>
+                      <select onChange={(e) => updateStatus(e, item.id)} value={item.state} className="form-control">
+                        {
+                          Object.values(statuses).map((statusItem, index) => (
+                            <option key={index} value={index}>{statusItem}</option>
+                          ))
+                        }
+                      </select>
+                    </td>
+                    <td>
+                      <a onClick={() => openViewModal(item.id)}><FaEye /></a> &nbsp;
+                      <a onClick={() => openEditModal(item.id)}><FaPen /></a> &nbsp;
+                      <a onClick={() => openDeleteModal(item.id)}><FaTimes /></a> &nbsp;
+                    </td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
       </div>
       {
         state.displayItem &&
