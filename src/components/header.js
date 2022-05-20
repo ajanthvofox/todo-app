@@ -7,7 +7,8 @@ const Header = (props) => {
   const [state] = React.useContext(AppContext);
   const { setAccountInfo } = useAccountInfo();
   const navigate = useNavigate();
-  const doLogout = () => {
+  const doLogout = (e) => {
+    e.preventDefault();
     setAccountInfo('', false);
     navigate('/sign-in');
   };
@@ -33,7 +34,7 @@ const Header = (props) => {
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link" onClick={() => doLogout()}>
+                      <a href="#!" className="nav-link" onClick={doLogout}>
                         Sign Out
                       </a>
                     </li>

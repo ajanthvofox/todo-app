@@ -1,7 +1,8 @@
 import React from 'react';
 import { AppContext } from '../context';
 
-export default function useAccountId() {
+const useAccountId = () => {
+  // eslint-disable-next-line
   const [state, setState] = React.useContext(AppContext);
 
   const setAccountInfo = (data, status) => {
@@ -20,4 +21,6 @@ export default function useAccountId() {
   return {
     setAccountInfo
   };
-}
+};
+
+export default useAccountId;

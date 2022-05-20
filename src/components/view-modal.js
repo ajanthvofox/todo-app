@@ -6,7 +6,7 @@ const ViewModal = (props) => {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">Task #{props.displayItem.id}</h5>
-            <button onClick={() => props.closeDisplayItem()} type="button" className="close" data-dismiss="modal" aria-label="Close">
+            <button onClick={() => props.closeDisplayItem()} type="button" className="close btn" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -15,20 +15,20 @@ const ViewModal = (props) => {
               <table className="table">
                 <tbody>
                   <tr>
-                    <td scope="col"><b>Title</b></td>
-                    <td scope="col">{props.displayItem.title}</td>
+                    <td><b>Title</b></td>
+                    <td>{props.displayItem.title}</td>
                   </tr>
                   <tr>
-                    <td scope="col"><b>Description</b></td>
-                    <td scope="col">{props.displayItem.description}</td>
+                    <td><b>Description</b></td>
+                    <td>{props.displayItem.description}</td>
                   </tr>
                   <tr>
-                    <td scope="col"><b>User ID</b></td>
-                    <td scope="col">{props.displayItem.userId}</td>
+                    <td><b>User ID</b></td>
+                    <td>{props.displayItem.userId}</td>
                   </tr>
                   <tr>
-                    <td scope="col"><b>Status</b></td>
-                    <td scope="col">{statuses[props.displayItem.state]}</td>
+                    <td><b>Status</b></td>
+                    <td>{statuses[props.displayItem.state]}</td>
                   </tr>
                 </tbody>
               </table>

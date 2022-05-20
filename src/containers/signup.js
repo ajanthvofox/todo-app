@@ -11,7 +11,8 @@ const initialState = {
 const Signup = (props) => {
   const [signupState, setSignupState] = React.useState({ ...initialState });
   const navigate = useNavigate();
-  const togglePassword = () => {
+  const togglePassword = (e) => {
+    e.preventDefault();
     setSignupState((prevState) => ({
       ...prevState,
       showPassword: !prevState.showPassword,
@@ -77,7 +78,7 @@ const Signup = (props) => {
             value={signupState.password}
             onChange={(e) => updateInput(e)}
           />
-          <a className='toggle' onClick={() => togglePassword()}>{signupState.showPassword ? 'Hide' : 'Show'}</a>
+          <a href="#!" className='toggle' onClick={togglePassword}>{signupState.showPassword ? 'Hide' : 'Show'}</a>
         </div>
 
         <div className="d-grid">

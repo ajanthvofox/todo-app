@@ -13,7 +13,8 @@ const Login = (props) => {
   const [loginState, setLoginState] = React.useState({ ...initialState });
   const { setAccountInfo } = useAccountInfo();
   const navigate = useNavigate();
-  const togglePassword = () => {
+  const togglePassword = (e) => {
+    e.preventDefault();
     setLoginState((prevState) => ({
       ...prevState,
       showPassword: !prevState.showPassword,
@@ -27,7 +28,6 @@ const Login = (props) => {
   };  
   const notify = () => toast.error("Please enter email and password to login!");
   const performLogin = () => {
-    debugger;
     if (loginState.email && loginState.password) {
       // make API call to login then set the returned data as accountInfo
       const data = { // hardcoded dummy data for now as no API
@@ -66,7 +66,7 @@ const Login = (props) => {
             value={loginState.password}
             onChange={(e) => updateInput(e)}
           />
-          <a className='toggle' onClick={() => togglePassword()}>{loginState.showPassword ? 'Hide' : 'Show'}</a>
+          <a href="#!" className='toggle' onClick={togglePassword}>{loginState.showPassword ? 'Hide' : 'Show'}</a>
         </div>
         <div className="mb-3">
           <div className="custom-control custom-checkbox">
@@ -86,7 +86,7 @@ const Login = (props) => {
           </button>
         </div>
         <p className="forgot-password text-right">
-          Forgot <a href="">password?</a>
+          Forgot <a href="#!">password?</a>
         </p>
       </div>
       <ToastContainer />

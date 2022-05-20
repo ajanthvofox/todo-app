@@ -20,7 +20,6 @@ function RequireGuest({ children }) {
 }
 
 function Wrapper() {
-  const [state] = React.useContext(AppContext);
   return (
     <Router>
       <div className="App">

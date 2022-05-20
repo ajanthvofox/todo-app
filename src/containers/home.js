@@ -22,6 +22,7 @@ const initialState = {
 };
 const Home = (props) => {
   const [state, setState] = React.useState({ ...initialState });
+  const [row, setRow] = React.useState();
   React.useEffect(() => {
     getToDoList();
   }, []);
@@ -150,7 +151,7 @@ const Home = (props) => {
     addNotify(newId);
   };
   const openDeleteModal = (id) => {
-    const newTodoItems = state.todoItems.filter(item => item.id != id);
+    const newTodoItems = state.todoItems.filter(item => item.id !== id);
     let newFilteredItems = [];
     if (state.filterText)
       newFilteredItems = newTodoItems.filter(item => item.title.toLowerCase().includes(state.filterText.toLowerCase()));
@@ -160,7 +161,7 @@ const Home = (props) => {
       filteredItems: newFilteredItems,
     }));
     deleteNotify(id);
-  }
+  };
   const sortWith = (column) => {
     let sortAsc = state.sortAsc;
     if (column === state.sortItem)
@@ -176,7 +177,33 @@ const Home = (props) => {
       sortItem: column,
       sortAsc,
     }));
-  }
+  };
+  const dragStart = (event) => {  
+    setRow(event.target); 
+  };
+  const dragOver = (event) => {
+    let e = event;
+    e.preventDefault();    
+    let children = Array.from(e.target.parentNode.parentNode.children);    
+    children.forEach (elem => {
+      elem.classList.remove("dragg-over");
+    })
+    e.target.parentNode.classList.add("dragg-over"); 
+    if (children.indexOf(e.target.parentNode)>children.indexOf(row))
+      e.target.parentNode.after(row);
+    else
+      e.target.parentNode.before(row);
+  };
+  const setDraggable = (event) => {
+    event.target.parentNode.setAttribute('draggable', 'true');
+  };
+  const clearDraggable = (event) => {
+    let children = Array.from(event.target.parentNode.children); 
+    children.forEach (elem => {
+      elem.classList.remove("dragg-over");
+      elem.setAttribute('draggable', 'false');
+    })
+  };
   const statusNotify = (id, status) => toast.success(`Task #${id} status updated as ${status} successfully`);
   const editNotify = (id) => toast.success(`Task #${id} has been updated successfully`);
   const addNotify = (id) => toast.success(`Added new task with Task #${id} successfully`);
@@ -214,19 +241,21 @@ const Home = (props) => {
           <table className="table">
             <thead>
               <tr>
-                <th scope="col" onClick={() => sortWith('id')}># {state.sortItem === 'id' ? state.sortAsc ? <FaArrowUp className="sort-arrow" /> : <FaArrowDown className="sort-arrow" /> : ''}</th>
-                <th scope="col" onClick={() => sortWith('title')}>Title {state.sortItem === 'title' ? state.sortAsc ? <FaArrowUp className="sort-arrow" /> : <FaArrowDown className="sort-arrow" /> : ''}</th>
-                <th scope="col" onClick={() => sortWith('state')}>State {state.sortItem === 'state' ? state.sortAsc ? <FaArrowUp className="sort-arrow" /> : <FaArrowDown className="sort-arrow" /> : ''}</th>
+                <th></th>
+                <th role="button" scope="col" onClick={() => sortWith('id')}># {state.sortItem === 'id' ? state.sortAsc ? <FaArrowUp className="sort-arrow" /> : <FaArrowDown className="sort-arrow" /> : ''}</th>
+                <th role="button" scope="col" onClick={() => sortWith('title')}>Title {state.sortItem === 'title' ? state.sortAsc ? <FaArrowUp className="sort-arrow" /> : <FaArrowDown className="sort-arrow" /> : ''}</th>
+                <th role="button" scope="col" onClick={() => sortWith('state')}>State {state.sortItem === 'state' ? state.sortAsc ? <FaArrowUp className="sort-arrow" /> : <FaArrowDown className="sort-arrow" /> : ''}</th>
                 <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
               {
                 (state.filterText || state.filterState !== 'default' ? state.filteredItems : state.todoItems)?.map((item, key) => (
-                  <tr key={key}>
-                    <th scope="row">{item.id}</th>
-                    <td>{item.title}</td>
-                    <td>
+                  <tr onDragStart={dragStart}  onDragOver={dragOver} onDragEnd={clearDraggable} key={key}>
+                    <td className="drag-handle" onMouseDown={setDraggable}></td>
+                    <th className="align-middle" scope="row">{item.id}</th>
+                    <td className="align-middle">{item.title}</td>
+                    <td className="align-middle">
                       <select onChange={(e) => updateStatus(e, item.id)} value={item.state} className="form-control">
                         {
                           Object.values(statuses).map((statusItem, index) => (
@@ -235,10 +264,10 @@ const Home = (props) => {
                         }
                       </select>
                     </td>
-                    <td>
-                      <a onClick={() => openViewModal(item.id)}><FaEye /></a> &nbsp;
-                      <a onClick={() => openEditModal(item.id)}><FaPen /></a> &nbsp;
-                      <a onClick={() => openDeleteModal(item.id)}><FaTimes /></a> &nbsp;
+                    <td className="align-middle">
+                      <span role="button" onClick={() => openViewModal(item.id)}><FaEye /></span> &nbsp;
+                      <span role="button" onClick={() => openEditModal(item.id)}><FaPen /></span> &nbsp;
+                      <span role="button" onClick={() => openDeleteModal(item.id)}><FaTimes /></span> &nbsp;
                     </td>
                   </tr>
                 ))

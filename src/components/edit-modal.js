@@ -20,7 +20,7 @@ const EditModal = (props) => {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">Edit Task #{props.editItem.id}</h5>
-            <button onClick={() => props.closeEditItem()} type="button" className="close" data-dismiss="modal" aria-label="Close">
+            <button onClick={() => props.closeEditItem()} type="button" className="close btn" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -29,8 +29,8 @@ const EditModal = (props) => {
               <table className="table">
                 <tbody>
                   <tr>
-                    <td scope="col"><b>Title</b></td>
-                    <td scope="col">
+                    <td><b>Title</b></td>
+                    <td>
                       <input type="text"
                         name="title"
                         className="form-control"
@@ -42,8 +42,8 @@ const EditModal = (props) => {
                     </td>
                   </tr>
                   <tr>
-                    <td scope="col"><b>Description</b></td>
-                    <td scope="col">
+                    <td><b>Description</b></td>
+                    <td>
                       <textarea 
                         name="description"
                         className="form-control" 
@@ -55,8 +55,8 @@ const EditModal = (props) => {
                     </td>
                   </tr>
                   <tr>
-                    <td scope="col"><b>User ID</b></td>
-                    <td scope="col">
+                    <td><b>User ID</b></td>
+                    <td>
                       <input type="text"
                         name="userId"
                         className="form-control"
@@ -68,8 +68,8 @@ const EditModal = (props) => {
                     </td>
                   </tr>
                   <tr>
-                    <td scope="col"><b>Status</b></td>
-                    <td scope="col">
+                    <td><b>Status</b></td>
+                    <td>
                       <select name='state' onChange={(e) => updateInput(e)} value={state.state} className="form-control" id="exampleFormControlSelect1">
                         {
                           Object.values(statuses).map((statusItem, index) => (
