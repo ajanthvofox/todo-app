@@ -50,8 +50,7 @@ const AddModal = (props) => {
                         id="exampleFormControlTextarea1"
                         rows="3"
                         onChange={(e) => updateInput(e)}
-                        value={state.description}>
-                      </textarea>
+                        value={state.description} />
                     </td>
                   </tr>
                   <tr>
