@@ -241,7 +241,7 @@ const Home = (props) => {
           <table className="table">
             <thead>
               <tr>
-                <th></th>
+                <th />
                 <th role="button" scope="col" onClick={() => sortWith('id')}># {state.sortItem === 'id' ? state.sortAsc ? <FaArrowUp className="sort-arrow" /> : <FaArrowDown className="sort-arrow" /> : ''}</th>
                 <th role="button" scope="col" onClick={() => sortWith('title')}>Title {state.sortItem === 'title' ? state.sortAsc ? <FaArrowUp className="sort-arrow" /> : <FaArrowDown className="sort-arrow" /> : ''}</th>
                 <th role="button" scope="col" onClick={() => sortWith('state')}>State {state.sortItem === 'state' ? state.sortAsc ? <FaArrowUp className="sort-arrow" /> : <FaArrowDown className="sort-arrow" /> : ''}</th>
@@ -252,7 +252,7 @@ const Home = (props) => {
               {
                 (state.filterText || state.filterState !== 'default' ? state.filteredItems : state.todoItems)?.map((item, key) => (
                   <tr onDragStart={dragStart}  onDragOver={dragOver} onDragEnd={clearDraggable} key={key}>
-                    <td className="drag-handle" onMouseDown={setDraggable}></td>
+                    <td className="drag-handle" onMouseDown={setDraggable} />
                     <th className="align-middle" scope="row">{item.id}</th>
                     <td className="align-middle">{item.title}</td>
                     <td className="align-middle">
